@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.go'
+      - 'go.*'
+      - 'testdata/**'
+  pull_request:
+    paths:
+      - '**.go'
+      - 'go.*'
+      - 'testdata/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+      - run: go test
+      - run: go build -v -race
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+      - name: lint
+        run: go vet
+      - name: format
+        run: go fmt && git add --intent-to-add . && git diff --exit-code
+  # Because of default in vscode extension
+  staticcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: dominikh/staticcheck-action@v1.3.0
+        with:
+          # Keep same version as *.nix
+          version: '2023.1.3'

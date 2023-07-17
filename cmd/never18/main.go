@@ -1,0 +1,80 @@
+package main
+
+import (
+	"flag"
+	"fmt"
+	"log"
+	"never18"
+	"os"
+	"time"
+)
+
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
+func main() {
+	versionFlag := flag.Bool("version", false, "print the version of this program")
+	birthDateFlag := flag.String("birth", "", "your birthday - first time mewling and puking in this world")
+	momentDateFlag := flag.String("moment", "", "Time flies like an arrow")
+	dateFormatFlag := flag.String("dateFormat", "2006-01-02", "Go date format for parsing")
+	limitFlag := flag.Int("limit", 17, "the limit of truth age")
+	doctorFlag := flag.Bool("doctor", false, "print the truth and falsehood age for debugging")
+
+	const usage = `Usage: never18 <flags>
+
+	$ never18 --birth 1962-08-07
+	$ never18 --birth 1962-08-07 --limit 13
+	$ never18 --birth 1962-08-07 --moment 2112-09-03
+	$ never18 --doctor
+	$ never18 --version`
+
+	flag.Usage = func() {
+		// https://github.com/golang/go/issues/57059#issuecomment-1336036866
+		fmt.Printf("%s", usage+"\n\n")
+		fmt.Println("Usage of command:")
+		flag.PrintDefaults()
+	}
+
+	flag.Parse()
+	if *versionFlag {
+		revision := commit[:7]
+		fmt.Printf("%s\n", "never18"+" "+version+" "+"("+revision+") # "+date)
+		return
+	}
+
+	if *birthDateFlag == "" {
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	birth, err := time.Parse(*dateFormatFlag, *birthDateFlag)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+
+	var moment time.Time
+	if *momentDateFlag == "" {
+		moment = time.Now()
+	} else {
+		moment, err = time.Parse(*dateFormatFlag, *momentDateFlag)
+		if err != nil {
+			log.Fatalf("%v", err)
+			flag.Usage()
+			os.Exit(1)
+		}
+	}
+
+	duration := moment.Sub(birth)
+	truthAge := never18.GetTruthAge(duration, *limitFlag)
+
+	if *doctorFlag {
+		fmt.Printf("birth: %v, moment: %v, duration: %+v\n", birth, moment, duration)
+		fmt.Printf("TruthAge: %v\n", truthAge)
+		fmt.Printf("FalsehoodAge: %v\n", never18.GetFalsehoodAgeFromDuration(duration))
+	}
+
+	fmt.Printf("%d years and %d months \n", truthAge.Years, truthAge.Months)
+}

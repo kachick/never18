@@ -1,0 +1,28 @@
+name: 'Dependency Review'
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - '**.nix'
+      - 'go.mod'
+      - 'go.sum'
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v3
+        with:
+          # https://spdx.org/licenses/
+          allow-licenses: MIT, BSD-3-Clause, BSD-2-Clause, 0BSD, Unlicense, ISC, Apache-2.0, CC-BY-4.0
+          # The PURL prefix is got from following command
+          # `gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/kachick/never18/dependency-graph/compare/87d736b80a8a254bcac003d97e0b84712176b04f...5ba877ff1048d5fedcc6758484623eb67737f0fb`
+          # Not found in https://github.com/package-url/packageurl-js
+          allow-dependencies-licenses: pkg:githubactions/DeterminateSystems/nix-installer-action@4

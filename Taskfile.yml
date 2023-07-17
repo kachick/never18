@@ -1,0 +1,43 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    deps:
+      - task: lint
+      - task: test
+      - task: build
+  install:
+    cmds:
+      - go install -ldflags "-X main.commit=$(git rev-parse HEAD) -X main.date=$(date --iso-8601)"
+  build:
+    cmds:
+      - goreleaser build --snapshot --single-target --clean
+  test:
+    cmds:
+      - go test
+  fmt:
+    cmds:
+      - typos . .github .vscode --write-changes
+      - dprint fmt
+      - go fmt
+      - nixpkgs-fmt ./*.nix
+  lint:
+    # go fmt does not have option for no effect - https://github.com/golang/go/issues/41189
+    cmds:
+      - dprint check
+      - go vet
+      - goreleaser check
+      - typos . .github .vscode
+      - nixpkgs-fmt --check ./*.nix
+      - staticcheck
+  versions:
+    cmds:
+      - nix --version
+      - task --version
+      - go version
+      - dprint --version
+      - goreleaser --version
+      - typos --version
+      - staticcheck --version
