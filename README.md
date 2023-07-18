@@ -23,6 +23,9 @@ never18 0.0.1 (70f68fa) # 2023-07-18T21:58:05Z
 
 > never18 --birth=1962-08-07 --limit=12 --moment=2112-09-03
 12 years, 1656 months, 27 days
+
+> never18 --birth=1962-08-07 --nominally
+60 years, 11 months, 11 days
 ```
 
 You can check other options via `--help`.

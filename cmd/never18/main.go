@@ -19,6 +19,7 @@ func main() {
 	momentDateFlag := flag.String("moment", "", "time flies like an arrow")
 	dateFormatFlag := flag.String("dateFormat", time.DateOnly, "Go date format for parsing")
 	limitFlag := flag.Int("limit", 17, "you believe that the number is the truth or your own soul")
+	nominallyFlag := flag.Bool("nominally", false, "print the nominally age")
 	versionFlag := flag.Bool("version", false, "print the version of this program")
 	doctorFlag := flag.Bool("doctor", false, "print information to stderr for bug reporting")
 
@@ -27,6 +28,7 @@ func main() {
 	$ never18 --birth 1962-08-07
 	$ never18 --birth 1962-08-07 --limit 12
 	$ never18 --birth 1962-08-07 --moment 2112-09-03
+	$ never18 --birth=1962-08-07 --nominally
 	$ never18 --birth 1962-08-07 --doctor
 	$ never18 --version`
 
@@ -76,18 +78,21 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
+	nominally, err := age.Nominally(moment)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
 
 	if *doctorFlag {
-		nominally, err := age.Nominally(moment)
-		if err != nil {
-			log.Fatalf("%v", err)
-		}
-
 		fmt.Fprintln(os.Stderr, version)
 		fmt.Fprintf(os.Stderr, "birth: %v, moment: %v, limit: %v\n", birth, moment, *limitFlag)
 		fmt.Fprintf(os.Stderr, "TruthAge: %v\n", truth)
 		fmt.Fprintf(os.Stderr, "NominallyAge: %v\n", nominally)
 	}
 
-	fmt.Println(truth)
+	if *nominallyFlag {
+		fmt.Println(nominally)
+	} else {
+		fmt.Println(truth)
+	}
 }
