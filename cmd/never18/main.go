@@ -20,7 +20,7 @@ func main() {
 	momentDateFlag := flag.String("moment", "", "Time flies like an arrow")
 	dateFormatFlag := flag.String("dateFormat", time.DateOnly, "Go date format for parsing")
 	limitFlag := flag.Int("limit", 17, "the limit of truth age")
-	doctorFlag := flag.Bool("doctor", false, "print the truth and falsehood age for debugging")
+	doctorFlag := flag.Bool("doctor", false, "print the truth and nominally age for debugging")
 
 	const usage = `Usage: never18 --birth=[YOUR_BIRTH_DAY] <flags>
 
@@ -72,7 +72,7 @@ func main() {
 
 	if *doctorFlag {
 		fmt.Printf("TruthAge: %v\n", age.Truth(moment, *limitFlag))
-		fmt.Printf("FalsehoodAge: %v\n", age.Falsehood(moment))
+		fmt.Printf("NominallyAge: %v\n", age.Nominally(moment))
 	}
 
 	fmt.Println(age.Truth(moment, *limitFlag))

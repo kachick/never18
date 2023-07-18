@@ -20,7 +20,7 @@ func (r Report) String() string {
 	return fmt.Sprintf("%d years, %d months, %d days", r.Years, r.Months, r.Days)
 }
 
-func (a Age) Falsehood(moment time.Time) Report {
+func (a Age) Nominally(moment time.Time) Report {
 	var (
 		years  int
 		months int
@@ -69,18 +69,18 @@ func (a Age) Truth(moment time.Time, limitYears int) Report {
 		months int
 	)
 
-	falsehood := a.Falsehood(moment)
-	if falsehood.Years <= limitYears {
-		years = falsehood.Years
-		months = falsehood.Months
+	nominally := a.Nominally(moment)
+	if nominally.Years <= limitYears {
+		years = nominally.Years
+		months = nominally.Months
 	} else {
 		years = limitYears
-		months = falsehood.Months + ((falsehood.Years - limitYears) * 12)
+		months = nominally.Months + ((nominally.Years - limitYears) * 12)
 	}
 
 	return Report{
 		Years:  years,
 		Months: months,
-		Days:   falsehood.Days,
+		Days:   nominally.Days,
 	}
 }
