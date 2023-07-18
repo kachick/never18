@@ -5,14 +5,8 @@ import (
 	"time"
 )
 
-func mustParseDate(date string) time.Time {
-	then, err := time.Parse(time.DateOnly, date)
-	if err != nil {
-		panic(err)
-
-	}
-
-	return then
+func getTime(year int, month time.Month, day int) time.Time {
+	return time.Date(year, month, day, 0, 0, 0, 0, time.Local)
 }
 
 func TestTruthAge(t *testing.T) {
@@ -27,8 +21,8 @@ func TestTruthAge(t *testing.T) {
 	}{
 		{
 			name:       "ドラえもんが生まれた日まで未来の技術で生き延びたのび太は何歳になっているのか",
-			birth:      mustParseDate("1962-08-07"),
-			moment:     mustParseDate("2112-09-03"),
+			birth:      getTime(1962, 8, 7),
+			moment:     getTime(2112, 9, 3),
 			limitYears: 12,
 			nominally: Report{
 				Years:  150,
@@ -43,8 +37,8 @@ func TestTruthAge(t *testing.T) {
 		},
 		{
 			name:       "このコードを書き出した日の、のび太の年齢",
-			birth:      mustParseDate("1962-08-07"),
-			moment:     mustParseDate("2023-07-17"),
+			birth:      getTime(1962, 8, 7),
+			moment:     getTime(2023, 7, 17),
 			limitYears: 12,
 			nominally: Report{
 				Years:  60,
@@ -59,8 +53,8 @@ func TestTruthAge(t *testing.T) {
 		},
 		{
 			name:       "「ぼくの生まれた日」 ~ てんとう虫コミックス第2巻",
-			birth:      mustParseDate("1962-08-07"),
-			moment:     mustParseDate("1962-08-07"),
+			birth:      getTime(1962, 8, 7),
+			moment:     getTime(1962, 8, 7),
 			limitYears: 12,
 			nominally: Report{
 				Years:  0,
@@ -75,15 +69,15 @@ func TestTruthAge(t *testing.T) {
 		},
 		{
 			name:       "「のび太が消えちゃう?」 ~ てんとう虫コミックス第43巻",
-			birth:      mustParseDate("1962-08-07"),
-			moment:     mustParseDate("1952-08-07"), // 20 years before the (almost) 10 years old.
+			birth:      getTime(1962, 8, 7),
+			moment:     getTime(1952, 8, 7), // 20 years before the (almost) 10 years old.
 			limitYears: 12,
 			fail:       true,
 		},
 		{
 			name:       "許容されている年齢までは、戸籍上と同様に振る舞う",
-			birth:      mustParseDate("1962-08-07"),
-			moment:     mustParseDate("1972-05-29"),
+			birth:      getTime(1962, 8, 7),
+			moment:     getTime(1972, 5, 29),
 			limitYears: 17,
 			nominally: Report{
 				Years:  9,
