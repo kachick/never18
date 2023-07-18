@@ -3,11 +3,14 @@ name: goreleaser
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
+  checks: read # For private repositories
+  actions: read # For private repositories
 
 jobs:
   goreleaser:
