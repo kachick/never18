@@ -2,6 +2,7 @@ package never18
 
 import (
 	"fmt"
+	"math"
 	"time"
 )
 
@@ -45,8 +46,14 @@ func (a Age) Falsehood(moment time.Time) Report {
 	if daysSub >= 0 {
 		days = daysSub
 	} else {
-		// Not accurate, days in a month may be 28~31
-		days = 30 + daysSub
+		months -= 1
+		lastMonth := int(a.Birth.Month()) + months
+		if lastMonth > int(time.December) {
+			panic("last month is greater than December")
+		}
+		// day may be 28~31, so using duration from the birthday in last month
+		dayBegin := time.Date(a.Birth.Year()+years, time.Month(lastMonth), a.Birth.Day(), 0, 0, 0, 0, time.UTC)
+		days = int(math.Round(moment.Sub(dayBegin).Hours())) / 24
 	}
 
 	return Report{
