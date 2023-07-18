@@ -37,7 +37,7 @@ func (f FalsehoodAge) TruthAge(limit int) TruthAge {
 	}
 }
 
-func divmod(numerator, denominator int) (quotient int, remainder int) {
+func divmod(numerator int, denominator int) (quotient int, remainder int) {
 	quotient = numerator / denominator
 	remainder = numerator % denominator
 	return quotient, remainder
