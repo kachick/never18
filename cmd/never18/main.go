@@ -66,14 +66,14 @@ func main() {
 		}
 	}
 
-	duration := moment.Sub(birth)
-	truthAge := never18.GetTruthAge(duration, *limitFlag)
-
-	if *doctorFlag {
-		fmt.Printf("birth: %v, moment: %v, duration: %+v\n", birth, moment, duration)
-		fmt.Printf("TruthAge: %v\n", truthAge)
-		fmt.Printf("FalsehoodAge: %v\n", never18.GetFalsehoodAgeFromDuration(duration))
+	age := never18.Age{
+		Birth: birth,
 	}
 
-	fmt.Printf("%d years and %d months \n", truthAge.Years, truthAge.Months)
+	if *doctorFlag {
+		fmt.Printf("TruthAge: %v\n", age.Truth(moment, *limitFlag))
+		fmt.Printf("FalsehoodAge: %v\n", age.Falsehood(moment))
+	}
+
+	fmt.Println(age.Truth(moment, *limitFlag))
 }
