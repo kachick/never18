@@ -5,11 +5,13 @@ on:
     branches:
       - main
     paths:
+      - '.github/workflows/ci-go.yml'
       - '**.go'
       - 'go.*'
       - 'testdata/**'
   pull_request:
     paths:
+      - '.github/workflows/ci-go.yml'
       - '**.go'
       - 'go.*'
       - 'testdata/**'
@@ -35,18 +37,13 @@ jobs:
         with:
           go-version-file: 'go.mod'
           cache-dependency-path: 'go.sum'
-      - name: lint
-        run: go vet
-      - name: format
+      - name: check format
         run: go fmt && git add --intent-to-add . && git diff --exit-code
-  # Because of default in vscode extension
-  staticcheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
+      - run: go vet
+      # Because of default in vscode extension
       - uses: dominikh/staticcheck-action@v1.3.0
         with:
+          # Keep after `setup-go`, to use same go version
+          install-go: false
           # Keep same version as *.nix
           version: '2023.1.3'
