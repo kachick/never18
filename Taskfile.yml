@@ -32,7 +32,7 @@ tasks:
       - typos . .github .vscode
       - nixpkgs-fmt --check ./*.nix
       - staticcheck
-  versions:
+  deps:
     cmds:
       - nix --version
       - task --version

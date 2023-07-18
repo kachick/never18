@@ -31,5 +31,5 @@ jobs:
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
       - run: nix flake check
       - run: nix develop --command echo 'This step should be done before any other "nix develop" steps because of measuring Nix build time'
-      - run: nix develop --command task versions
+      - run: nix develop --command task deps
       - run: nix develop --command task
