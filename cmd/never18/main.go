@@ -4,9 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"never18"
 	"os"
 	"time"
+
+	"github.com/kachick/never18"
 )
 
 var (
