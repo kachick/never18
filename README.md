@@ -4,12 +4,21 @@ Happy happy 17th birthday to everyone, I hope you all had a safe and happy 17th 
 
 ## Installation
 
-`go install` is also okay, or use [prebuilt binaries](https://github.com/kachick/never18/releases)
+[Prebuilt binaries](https://github.com/kachick/never18/releases)
 
 ```console
 > curl -L https://github.com/kachick/never18/releases/latest/download/never18_Linux_x86_64.tar.gz | tar xvz -C ./ never18
 > ./never18 --version
 never18 0.0.1 (70f68fa) # 2023-07-18T21:58:05Z
+```
+
+`go install`
+
+```console
+> go install github.com/kachick/never18/cmd/never18@latest
+go: downloading...
+> ${GOPATH:-"$HOME/go"}/bin/never18 --version
+never18 dev (rev)
 ```
 
 ## Usage

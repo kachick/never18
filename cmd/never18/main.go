@@ -4,14 +4,16 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"never18"
 	"os"
 	"time"
+
+	"github.com/kachick/never18"
 )
 
 var (
-	version = "dev"
-	commit  = "none"
+	version  = "dev"
+	commit   = "none"
+	revision = "rev"
 )
 
 func main() {
@@ -39,7 +41,9 @@ func main() {
 		flag.PrintDefaults()
 	}
 
-	revision := commit[:7]
+	if len(commit) >= 7 {
+		revision = commit[:7]
+	}
 	version := fmt.Sprintf("%s\n", "never18"+" "+version+" "+"("+revision+")")
 
 	flag.Parse()
