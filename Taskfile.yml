@@ -10,10 +10,13 @@ tasks:
       - task: build
   install:
     cmds:
-      - go install -ldflags "-X main.commit=$(git rev-parse HEAD) -X main.date=$(date --iso-8601)"
-  build:
+      - go install -ldflags "-X main.commit=$(git rev-parse HEAD)"
+  build:preview:
     cmds:
       - goreleaser build --snapshot --single-target --clean --output dist/never18
+  build:
+    cmds:
+      - go build -o ./dist/never18 ./cmd/never18
   test:
     cmds:
       - go test

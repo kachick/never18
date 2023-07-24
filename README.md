@@ -25,7 +25,7 @@ In [Nix](https://nixos.org/), you can skip installation steps
 
 ```console
 > nix run github:kachick/never18 -- --version
-never18 0.0.1-next (rev)
+never18 dev (rev)
 ```
 
 ## Usage

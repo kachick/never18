@@ -11,8 +11,10 @@ import (
 )
 
 var (
-	version  = "dev"
-	commit   = "none"
+	// Used in goreleaser
+	version = "dev"
+	commit  = "none"
+
 	revision = "rev"
 )
 

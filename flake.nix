@@ -32,9 +32,6 @@
             buildInputs = with pkgs; [
               go_1_20
               go-task
-              goreleaser
-              # To embed tag and commit ref for version template
-              git
             ];
             buildPhase = ''
               task build
