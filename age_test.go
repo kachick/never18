@@ -90,6 +90,52 @@ func TestTruthAge(t *testing.T) {
 				Days:   22,
 			},
 		},
+		{
+			name:       "#3 - same day in different month",
+			birth:      getTime(2012, 9, 24),
+			moment:     getTime(2023, 7, 24),
+			limitYears: 17,
+			nominally: Report{
+				Years:  10,
+				Months: 10,
+				Days:   0,
+			},
+			truth: Report{
+				Years:  10,
+				Months: 10,
+				Days:   0,
+			},
+		}, {
+			name:       "#3 - before day in different month",
+			birth:      getTime(2012, 9, 23),
+			moment:     getTime(2023, 7, 24),
+			limitYears: 17,
+			nominally: Report{
+				Years:  10,
+				Months: 10,
+				Days:   1,
+			},
+			truth: Report{
+				Years:  10,
+				Months: 10,
+				Days:   1,
+			},
+		}, {
+			name:       "#3 - next day in different month",
+			birth:      getTime(2012, 9, 25),
+			moment:     getTime(2023, 7, 24),
+			limitYears: 17,
+			nominally: Report{
+				Years:  10,
+				Months: 9,
+				Days:   29,
+			},
+			truth: Report{
+				Years:  10,
+				Months: 9,
+				Days:   29,
+			},
+		},
 	}
 
 	for _, tc := range testCases {

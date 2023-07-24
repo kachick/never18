@@ -50,10 +50,9 @@ func (a Age) Nominally(moment time.Time) (Report, error) {
 		days = daysSub
 	} else {
 		months -= 1
+		// This lastMonth may be grater than 12, but golang time library does the right thing.
+		// See https://github.com/golang/go/blob/go1.20.6/src/time/time.go#L1455-L1457
 		lastMonth := int(a.Birth.Month()) + months
-		if lastMonth > int(time.December) {
-			return Report{}, errors.New("last month is greater than December")
-		}
 		// day may be 28~31, so using duration from the birthday in last month
 		dayBegin := time.Date(a.Birth.Year()+years, time.Month(lastMonth), a.Birth.Day(), 0, 0, 0, 0, time.Local)
 		days = int(math.Round(moment.Sub(dayBegin).Hours())) / 24
