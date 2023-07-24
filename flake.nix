@@ -42,7 +42,7 @@
             '';
           };
 
-        defaultPackage = packages.never18;
+        packages.default = packages.never18;
 
         # `nix run`
         apps.default = {
