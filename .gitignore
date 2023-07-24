@@ -26,4 +26,6 @@ go.work
 # goreleaser generates to
 dist/
 
+# Nix
 .direnv/
+result

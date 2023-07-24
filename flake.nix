@@ -9,7 +9,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
@@ -24,5 +24,28 @@
               go-tools
             ];
           };
-      });
+
+        packages.never18 = pkgs.stdenv.mkDerivation
+          {
+            name = "never18";
+            src = self;
+            buildInputs = with pkgs; [
+              go_1_20
+              go-task
+              goreleaser
+              # To embed commit ref for revision
+              git
+            ];
+            buildPhase = ''
+              task build
+            '';
+            installPhase = ''
+              mkdir -p $out/bin
+              install -t $out/bin dist/never18
+            '';
+          };
+
+        defaultPackage = packages.never18;
+      }
+    );
 }
