@@ -91,7 +91,7 @@ func TestTruthAge(t *testing.T) {
 			},
 		},
 		{
-			name:       "#3 - Good - same day in different month",
+			name:       "#3 - same day in different month",
 			birth:      getTime(2012, 9, 24),
 			moment:     getTime(2023, 7, 24),
 			limitYears: 17,
@@ -106,7 +106,7 @@ func TestTruthAge(t *testing.T) {
 				Days:   0,
 			},
 		}, {
-			name:       "#3 - Good - before day in different month",
+			name:       "#3 - before day in different month",
 			birth:      getTime(2012, 9, 23),
 			moment:     getTime(2023, 7, 24),
 			limitYears: 17,
@@ -121,7 +121,7 @@ func TestTruthAge(t *testing.T) {
 				Days:   1,
 			},
 		}, {
-			name:       "#3 - Bad - next day in different month",
+			name:       "#3 - next day in different month",
 			birth:      getTime(2012, 9, 25),
 			moment:     getTime(2023, 7, 24),
 			limitYears: 17,
