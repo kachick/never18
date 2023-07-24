@@ -34,6 +34,8 @@
               go-task
             ];
             buildPhase = ''
+              # https://github.com/NixOS/nix/issues/670#issuecomment-1211700127
+              export HOME=$(pwd)
               task build
             '';
             installPhase = ''
