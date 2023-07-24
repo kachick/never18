@@ -33,7 +33,7 @@
               go_1_20
               go-task
               goreleaser
-              # To embed commit ref for revision
+              # To embed tag and commit ref for version template
               git
             ];
             buildPhase = ''
@@ -46,6 +46,12 @@
           };
 
         defaultPackage = packages.never18;
+
+        # `nix run`
+        apps.default = {
+          type = "app";
+          program = "${packages.never18}/bin/never18";
+        };
       }
     );
 }

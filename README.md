@@ -21,6 +21,13 @@ go: downloading...
 never18 dev (rev)
 ```
 
+In [Nix](https://nixos.org/), you can skip installation steps
+
+```console
+> nix run github:kachick/never18 -- --version
+never18 0.0.1-next (rev)
+```
+
 ## Usage
 
 ```console
