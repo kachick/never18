@@ -9,7 +9,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
@@ -24,5 +24,33 @@
               go-tools
             ];
           };
-      });
+
+        packages.never18 = pkgs.stdenv.mkDerivation
+          {
+            name = "never18";
+            src = self;
+            buildInputs = with pkgs; [
+              go_1_20
+              go-task
+            ];
+            buildPhase = ''
+              # https://github.com/NixOS/nix/issues/670#issuecomment-1211700127
+              export HOME=$(pwd)
+              task build
+            '';
+            installPhase = ''
+              mkdir -p $out/bin
+              install -t $out/bin dist/never18
+            '';
+          };
+
+        packages.default = packages.never18;
+
+        # `nix run`
+        apps.default = {
+          type = "app";
+          program = "${packages.never18}/bin/never18";
+        };
+      }
+    );
 }
