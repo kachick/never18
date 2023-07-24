@@ -52,7 +52,7 @@ func (a Age) Nominally(moment time.Time) (Report, error) {
 		months -= 1
 		lastMonth := int(a.Birth.Month()) + months
 		if lastMonth > int(time.December) {
-			return Report{}, errors.New("last month is greater than December")
+			return Report{}, fmt.Errorf("last month %d is greater than December", lastMonth)
 		}
 		// day may be 28~31, so using duration from the birthday in last month
 		dayBegin := time.Date(a.Birth.Year()+years, time.Month(lastMonth), a.Birth.Day(), 0, 0, 0, 0, time.Local)
