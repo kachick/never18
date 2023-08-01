@@ -1,5 +1,8 @@
 # never18
 
+[![CI - Go Status](https://github.com/kachick/never18/actions/workflows/ci-go.yml/badge.svg?branch=main)](https://github.com/kachick/never18/actions/workflows/ci-go.yml?query=branch%3Amain+)
+[![CI - Nix Status](https://github.com/kachick/never18/actions/workflows/ci-nix.yml/badge.svg?branch=main)](https://github.com/kachick/never18/actions/workflows/ci-nix.yml?query=branch%3Amain+)
+
 Happy happy 17th birthday to everyone, I hope you all had a safe and happy 17th birthday this year!
 
 ## Installation
