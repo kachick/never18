@@ -13,6 +13,9 @@
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
+              # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
+              pkgs.bashInteractive
+
               go_1_20
               nil
               nixpkgs-fmt
