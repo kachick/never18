@@ -19,7 +19,7 @@
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
-              pkgs.bashInteractive
+              bashInteractive
 
               go_1_20
               nil
