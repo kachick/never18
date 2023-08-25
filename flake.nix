@@ -19,9 +19,9 @@
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
-              pkgs.bashInteractive
+              bashInteractive
 
-              go_1_20
+              go_1_21
               nil
               nixpkgs-fmt
               dprint
@@ -38,7 +38,7 @@
             name = "never18";
             src = self;
             buildInputs = with pkgs; [
-              go_1_20
+              go_1_21
               go-task
             ];
             buildPhase = ''
