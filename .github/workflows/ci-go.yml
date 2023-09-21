@@ -46,4 +46,4 @@ jobs:
           # Keep after `setup-go`, to use same go version
           install-go: false
           # Keep same version as used in *.nix
-          version: '2023.1.5'
+          version: '2023.1.6'
