@@ -19,22 +19,22 @@ tasks:
       - go build -o ./dist/never18 ./cmd/never18
   test:
     cmds:
-      - go test
+      - go test ./...
   fmt:
     cmds:
       - typos . .github .vscode --write-changes
       - dprint fmt
-      - go fmt
+      - go fmt ./...
       - nixpkgs-fmt ./*.nix
   lint:
     # go fmt does not have option for no effect - https://github.com/golang/go/issues/41189
     cmds:
       - dprint check
-      - go vet
+      - go vet ./...
       - goreleaser check
       - typos . .github .vscode
       - nixpkgs-fmt --check ./*.nix
-      - staticcheck
+      - staticcheck ./...
   deps:
     cmds:
       - nix --version
