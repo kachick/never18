@@ -33,24 +33,23 @@
             ];
           };
 
-        packages.never18 = pkgs.stdenv.mkDerivation
-          {
-            name = "never18";
-            src = self;
-            buildInputs = with pkgs; [
-              go_1_21
-              go-task
-            ];
-            buildPhase = ''
-              # https://github.com/NixOS/nix/issues/670#issuecomment-1211700127
-              export HOME=$(pwd)
-              task build
-            '';
-            installPhase = ''
-              mkdir -p $out/bin
-              install -t $out/bin dist/never18
-            '';
-          };
+        packages.never18 = pkgs.buildGo121Module rec {
+          pname = "never18";
+          version = "0.0.4";
+          commit = if (self ? rev) then self.rev else "dummy";
+          src = self;
+
+          # When updating go.mod or go.sum, update this sha together
+          vendorSha256 = null;
+
+          ldflags = [
+            "-s"
+            "-w"
+            "-X main.version=${version}"
+            "-X main.commit=${commit}"
+          ];
+        };
+
 
         packages.default = packages.never18;
 
