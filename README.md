@@ -28,7 +28,7 @@ In [Nix](https://nixos.org/), you can skip installation steps
 
 ```console
 > nix run github:kachick/never18 -- --version
-never18 dev (rev)
+never18 0.0.4 (be419ed)
 > nix run github:kachick/never18/v0.0.4 -- --birth=1962-08-07
 (Will work with specific versions since v0.0.4+)
 ```
