@@ -13,7 +13,6 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-
       in
       rec {
         devShells.default = with pkgs;
