@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Wait other jobs
         if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
-        uses: kachick/wait-other-jobs@v1.3.0
+        uses: kachick/wait-other-jobs@v2.0.2
         timeout-minutes: 10
       - name: Approve and merge
         if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v1.3.0
+        uses: kachick/wait-other-jobs@v2.0.2
         timeout-minutes: 10
         with:
           retry-method: 'equal_intervals'
