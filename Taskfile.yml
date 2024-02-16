@@ -34,7 +34,6 @@ tasks:
       - goreleaser check
       - typos . .github .vscode
       - nixpkgs-fmt --check ./*.nix
-      - staticcheck ./...
   deps:
     cmds:
       - nix --version
@@ -43,4 +42,3 @@ tasks:
       - dprint --version
       - goreleaser --version
       - typos --version
-      - staticcheck --version
