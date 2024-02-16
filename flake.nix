@@ -21,7 +21,7 @@
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
               bashInteractive
 
-              go_1_21
+              go_1_22
               nil
               nixpkgs-fmt
               dprint
@@ -33,14 +33,14 @@
             ];
           };
 
-        packages.never18 = pkgs.buildGo121Module rec {
+        packages.never18 = pkgs.buildGo122Module rec {
           pname = "never18";
           version = "0.0.4";
           commit = if (self ? rev) then self.rev else "dummy";
           src = self;
 
           # When updating go.mod or go.sum, update this sha together
-          vendorSha256 = null;
+          vendorHash = null;
 
           ldflags = [
             "-s"
