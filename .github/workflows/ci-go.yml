@@ -40,9 +40,3 @@ jobs:
       - name: check format
         run: go fmt ./... && git add --intent-to-add . && git diff --exit-code
       - run: go vet ./...
-      # Because of default in vscode extension
-      - uses: dominikh/staticcheck-action@v1.3.0
-        with:
-          # Keep after `setup-go`, to use same go version
-          install-go: false
-          version: '2023.1.6' # selfup { "regex": "\\d{4}[^']+", "script": "staticcheck --version | cut -d ' ' -f 2" }
