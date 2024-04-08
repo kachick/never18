@@ -149,7 +149,7 @@ func TestTruthAge(t *testing.T) {
 				if tc.fail {
 					return
 				} else {
-					t.Errorf("unexpected error happned: %v", err)
+					t.Errorf("unexpected error happened: %v", err)
 					return
 				}
 			}
@@ -162,7 +162,7 @@ func TestTruthAge(t *testing.T) {
 			truth, err := age.Truth(tc.moment, tc.limitYears)
 			if err != nil {
 				// Errors should be failed in nominally calling even if tc.fail is true.
-				t.Errorf("unexpected error happned: %v", err)
+				t.Errorf("unexpected error happened: %v", err)
 			}
 
 			if nominally != tc.nominally {
