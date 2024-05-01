@@ -32,6 +32,14 @@ jobs:
     steps:
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3.2.0
+        with:
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "release.yml"
+              }
+            ]
         timeout-minutes: 10
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
@@ -55,8 +63,13 @@ jobs:
         uses: kachick/wait-other-jobs@v3.2.0
         timeout-minutes: 10
         with:
-          retry-method: 'equal_intervals'
-          min-interval-seconds: '15'
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "release.yml"
+              }
+            ]
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
         env:
@@ -73,6 +86,14 @@ jobs:
         run: echo '${{ github.actor }}'
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3.2.0
+        with:
+          skip-same-workflow: 'true'
+          skip-list: |
+            [
+              {
+                "workflowFile": "release.yml"
+              }
+            ]
         timeout-minutes: 20
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --delete-branch --squash "$PR_URL"

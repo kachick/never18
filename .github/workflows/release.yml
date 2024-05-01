@@ -27,6 +27,13 @@ jobs:
           cache-dependency-path: 'go.sum'
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v3.2.0
+        with:
+          skip-list: |
+            [
+              {
+                "workflowFile": "merge-bot-pr.yml"
+              }
+            ]
         if: startsWith(github.ref, 'refs/tags/')
         timeout-minutes: 30
       - name: Run GoReleaser
