@@ -25,7 +25,6 @@
               nil
               nixpkgs-fmt
               dprint
-              actionlint
               go-task
               goreleaser
               typos
