@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v3.2.0
+        uses: kachick/wait-other-jobs@v3.4.0
         with:
           skip-same-workflow: 'true'
           skip-list: |
@@ -60,7 +60,7 @@ jobs:
     if: ${{ github.actor == 'renovate[bot]' }}
     steps:
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v3.2.0
+        uses: kachick/wait-other-jobs@v3.4.0
         timeout-minutes: 10
         with:
           skip-same-workflow: 'true'
@@ -85,7 +85,7 @@ jobs:
       - name: Dump context to debug
         run: echo '${{ github.actor }}'
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v3.2.0
+        uses: kachick/wait-other-jobs@v3.4.0
         with:
           skip-same-workflow: 'true'
           skip-list: |

@@ -26,7 +26,7 @@ jobs:
           go-version-file: 'go.mod'
           cache-dependency-path: 'go.sum'
       - name: Wait other jobs
-        uses: kachick/wait-other-jobs@v3.2.0
+        uses: kachick/wait-other-jobs@v3.4.0
         with:
           skip-list: |
             [
